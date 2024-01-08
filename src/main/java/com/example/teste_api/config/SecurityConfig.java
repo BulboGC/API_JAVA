@@ -2,6 +2,7 @@ package com.example.teste_api.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,8 +17,8 @@ public class SecurityConfig  {
         return httpSecurity.authorizeHttpRequests(
                 autorizeConfig ->{
 
-                    autorizeConfig.requestMatchers("/login").permitAll();
-                    autorizeConfig.requestMatchers("/logout").permitAll();
+                    autorizeConfig.requestMatchers(HttpMethod.POST,"/login").permitAll();
+                    autorizeConfig.requestMatchers(HttpMethod.POST,"/signin").permitAll();
                     autorizeConfig.anyRequest().authenticated();
                 }
         ).formLogin(Customizer.withDefaults()).build();
