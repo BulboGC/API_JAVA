@@ -9,7 +9,7 @@ public class TesteApiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TesteApiApplication.class, args);
-		System.out.println("ola");
+
 	}
 
 

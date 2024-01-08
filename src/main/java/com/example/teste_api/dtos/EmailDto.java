@@ -1,22 +1,13 @@
 package com.example.teste_api.dtos;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
-
 import jakarta.validation.constraints.Email;
 
-@Data
-public class EmailDto {
-    @NotBlank
-    private String ownerRef;
-    @NotBlank
-    @Email
-    private String emailFrom;
-    @NotBlank
-    @Email
-    private String emailTo;
-    @NotBlank
-    private String subject;
-    @NotBlank
-    private String text;
+public record EmailDto(
+        @NotBlank String ownerRef,
+        @NotBlank @Email String emailFrom,
+        @NotBlank @Email String emailTo,
+        @NotBlank String subject,
+        @NotBlank String text
+) {
 }
