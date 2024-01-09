@@ -1,5 +1,6 @@
 package com.example.teste_api.config;
 
+import org.springframework.boot.autoconfigure.security.oauth2.server.servlet.OAuth2AuthorizationServerJwtAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -12,6 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig  {
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)throws  Exception{
         return httpSecurity.authorizeHttpRequests(
