@@ -13,12 +13,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserSevice {
 
-    public String passwordEncoder(String password){
-        PasswordEncoder encoder = new BCryptPasswordEncoder();
-        return  encoder.encode(password);
-    }
+
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AuxService auxService;
 
     UserModel addUser(UserDto userDto){
        try{
@@ -30,8 +29,8 @@ public class UserSevice {
            if(existingUser.getEmail() == null || existingUser.getEmail().isEmpty() ){
                throw  new Error("o email informado já existe no sistema, por favor informe um email válido ou faça o login");
            }
-
-           userModel.setPassword(passwordEncoder(userModel.getPassword()));
+           //Encryptando a senha
+           userModel.setPassword(auxService.passwordEncoder(userModel.getPassword()));
 
            return userRepository.save(userModel);
        }catch (Exception e){
