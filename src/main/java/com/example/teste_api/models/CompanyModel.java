@@ -14,10 +14,21 @@ public class CompanyModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
+
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
+    private long cnpj;
+    @Column(columnDefinition = "boolean default false")
     private  boolean paid;
+
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<UserModel> employeelist;
+
+    public boolean isEmpty(){
+        return  name == null;
+    }
+
 
 }
