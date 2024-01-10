@@ -5,6 +5,8 @@ import com.example.teste_api.dtos.UserDto;
 import com.example.teste_api.models.CompanyModel;
 import com.example.teste_api.models.UserModel;
 import com.example.teste_api.repositories.CompanyRepository;
+import jakarta.transaction.Transactional;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +21,9 @@ public class CompanyService {
     @Autowired
     CompanyRepository companyRepository;
 
-    public CompanyModel createCompany(CompanyDto companyDto){
-        CompanyModel companyModel = new CompanyModel();
-        BeanUtils.copyProperties(companyDto,companyModel);
+    @Transactional
+    public CompanyModel createCompany(@NotNull CompanyDto companyDto){
+        CompanyModel companyModel = new CompanyModel(companyDto.companyName(),companyDto.cnpj());
         CompanyModel existCompany = companyRepository.findByCnpj(companyModel.getCnpj());
         if(existCompany.isEmpty()){
             return companyRepository.save(companyModel);
