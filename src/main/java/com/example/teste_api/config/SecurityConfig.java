@@ -1,29 +1,31 @@
 package com.example.teste_api.config;
 
-import org.springframework.boot.autoconfigure.security.oauth2.server.servlet.OAuth2AuthorizationServerJwtAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
-
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig  {
+@EnableMethodSecurity
+class SecurityConfig{
+@Bean
+SecurityFilterChain web(HttpSecurity http) throws Exception {
+    http
+            // ...
+            .authorizeHttpRequests(authorize -> authorize
 
-    @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)throws  Exception{
-        return httpSecurity.authorizeHttpRequests(
-                autorizeConfig ->{
+                    .requestMatchers("/register","/garoto").permitAll()
+                    .anyRequest().authenticated()
 
-                    autorizeConfig.requestMatchers(HttpMethod.POST,"/login").permitAll();
-                    autorizeConfig.requestMatchers(HttpMethod.POST,"/signin").permitAll();
-                    autorizeConfig.anyRequest().authenticated();
-                }
-        ).formLogin(Customizer.withDefaults()).build();
-    }
 
+
+
+            );
+    http.csrf().disable();
+
+    return http.build();
+}
 }

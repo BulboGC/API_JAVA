@@ -1,3 +1,4 @@
+/*
 package com.example.teste_api.services;
 
 import io.jsonwebtoken.Jwts;
@@ -41,3 +42,4 @@ public class JwtService extends OAuth2ResourceServerProperties.Jwt {
 
 
 }
+*/

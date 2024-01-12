@@ -29,6 +29,9 @@ public class CompanyModel {
 
     public CompanyModel() {
     }
+    public void  addEmployee(UserModel userModel){
+        employeelist.add(userModel);
+    }
 
     public CompanyModel(String name, String cnpj) {
         this.name = name;

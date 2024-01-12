@@ -27,6 +27,23 @@ public class UserModel implements UserDetails {
     @JoinColumn(name = "company_uuid")
     private CompanyModel company;
 
+    public boolean isEmpty() {
+        return email == null && password == null && role == null && company == null;
+    }
+
+    public UserModel() {
+    }
+
+    public UserModel(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public UserModel(String email, String password, UserRoleEnums role) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
