@@ -2,6 +2,7 @@ package com.example.teste_api.models;
 
 
 import com.example.teste_api.enums.UserRoleEnums;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,8 +24,10 @@ public class UserModel implements UserDetails {
     private String password;
     private UserRoleEnums role;
 
+
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "company_uuid")
+    @JoinColumn(name = "companyid", referencedColumnName = "uuid")
     private CompanyModel company;
 
     public boolean isEmpty() {

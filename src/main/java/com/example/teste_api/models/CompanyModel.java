@@ -3,6 +3,7 @@ package com.example.teste_api.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -36,6 +37,7 @@ public class CompanyModel {
     public CompanyModel(String name, String cnpj) {
         this.name = name;
         this.cnpj = cnpj;
+        this.employeelist = new ArrayList<>();
     }
 
     public boolean isEmpty(){
