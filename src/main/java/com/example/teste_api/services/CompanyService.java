@@ -8,7 +8,6 @@ import com.example.teste_api.models.UserModel;
 import com.example.teste_api.repositories.CompanyRepository;
 import com.example.teste_api.repositories.UserRepository;
 import jakarta.transaction.Transactional;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,29 +26,28 @@ public class CompanyService {
 
 
     @Transactional
-    public CompanyModel createCompany(@NotNull  CompanyDto companyDto){
+    public CompanyModel createCompany( CompanyDto companyDto){
         CompanyModel companyModel = new CompanyModel(companyDto.companyName(),companyDto.cnpj());
         CompanyModel existCompany = companyRepository.findByCnpj(companyModel.getCnpj());
-        if(existCompany.isEmpty()){
-            companyRepository.save(companyModel);
-        }else {
-            throw new Error("a empresa informada ja está cadastrada no sistema");
+        if(existCompany != null){
+            throw new Error("o cnpj informado já está cadastrado no sistema");
         }
         UserModel existUser = userRepository.findByEmail(companyDto.email());
-        if(existUser.isEmpty()){
+
+        if(existUser == null){
+
             UserModel user0 = new  UserModel(companyDto.email(),companyDto.password(), UserRoleEnums.CEO);
-            userRepository.save(user0);
+            user0.setCompany(companyModel);
             companyModel.addEmployee(user0);
-            Optional<CompanyModel> response =  companyRepository.findById(companyModel.getUuid());
-            return response.get();
+
+            return  companyRepository.save(companyModel);
+
         }else {
             throw new Error("O email informado ja esta cadastrado no sistema");
         }
 
 
-
     }
-
 
 
     public void deleteCompany(UUID companyId){
@@ -60,22 +58,12 @@ public class CompanyService {
     }
 
     public List<CompanyModel> getAllCompanies(){
-
-        try{
             return  companyRepository.findAll();
-        }catch (Error e) {
-            throw new Error("erro na busca no banco de dados: " + e);
-
-
-        }
     }
 
     public Optional<CompanyModel>  getCompany(UUID companyId){
-        try{
             return  companyRepository.findById(companyId);
-        }catch (Error e){
-            throw new Error("erro na busca no banco de dados: " + e);
-        }
+
     }
 
     public CompanyModel updateCompany(UUID companyId,UserDto userDto){

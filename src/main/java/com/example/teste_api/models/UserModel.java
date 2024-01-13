@@ -45,6 +45,12 @@ public class UserModel implements UserDetails {
         this.role = role;
     }
 
+    public UserModel(String email, String password, UserRoleEnums role, UUID company) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

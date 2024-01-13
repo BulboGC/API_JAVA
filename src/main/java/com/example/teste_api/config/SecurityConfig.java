@@ -2,6 +2,7 @@ package com.example.teste_api.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,7 +18,8 @@ SecurityFilterChain web(HttpSecurity http) throws Exception {
             // ...
             .authorizeHttpRequests(authorize -> authorize
 
-                    .requestMatchers("/register","/garoto").permitAll()
+                    .requestMatchers(HttpMethod.POST,"register").permitAll()
+                    .requestMatchers(HttpMethod.POST,"garoto").permitAll()
                     .anyRequest().authenticated()
 
 

@@ -17,9 +17,9 @@ import java.util.List;
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<Object> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
         ValidationErrorResponse errors = new ValidationErrorResponse();
 
         List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();

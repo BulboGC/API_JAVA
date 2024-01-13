@@ -1,6 +1,8 @@
-/*
+
 package com.example.teste_api.services;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,4 +44,3 @@ public class JwtService extends OAuth2ResourceServerProperties.Jwt {
 
 
 }
-*/

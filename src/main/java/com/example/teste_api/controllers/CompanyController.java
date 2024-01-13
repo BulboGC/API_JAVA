@@ -29,14 +29,15 @@ public class CompanyController {
 
 
 
-    @PostMapping("/resgister")
-    ResponseEntity<?> signin (@RequestBody @Valid  CompanyDto companyDto){
-            return ResponseEntity.status(HttpStatus.CREATED).body(companyService.createCompany(companyDto));
+    @PostMapping("/register")
+    ResponseEntity<?> register (@Valid @RequestBody  CompanyDto companyDto){
+        CompanyModel company = companyService.createCompany(companyDto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(company);
     }
 
 
     @PostMapping("/garoto")
-    ResponseEntity<?> fazoL(@RequestBody @Valid  CompanyDto companyDto){
+    ResponseEntity<?> fazoL(@Valid @RequestBody   CompanyDto companyDto){
         return ResponseEntity.status(HttpStatus.OK).body(new UserModel("bulbogc@gmail.com","1238425wky22"));
     }
 
