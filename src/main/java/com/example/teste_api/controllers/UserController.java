@@ -60,6 +60,17 @@ public class UserController {
 
         }
 
+
+        @PostMapping("/login")
+    public ResponseEntity<?> login(UserDto userDto){
+            return ResponseEntity.status(HttpStatus.OK).body("criado");
+        }
+
+
+
+
+
+
     }
 
 

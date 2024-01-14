@@ -24,6 +24,9 @@ public class CompanyService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    AuxService auxService;
+
 
     @Transactional
     public CompanyModel createCompany( CompanyDto companyDto){
@@ -35,8 +38,8 @@ public class CompanyService {
         UserModel existUser = userRepository.findByEmail(companyDto.email());
 
         if(existUser == null){
-
-            UserModel user0 = new  UserModel(companyDto.email(),companyDto.password(), UserRoleEnums.CEO);
+            String password = auxService.passwordEncoder(companyDto.password());
+            UserModel user0 = new  UserModel(companyDto.email(),password, UserRoleEnums.CEO);
             user0.setCompany(companyModel);
             companyModel.addEmployee(user0);
 

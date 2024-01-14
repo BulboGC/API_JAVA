@@ -1,12 +1,12 @@
 
 package com.example.teste_api.services;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
+
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -41,6 +41,7 @@ public class JwtService extends OAuth2ResourceServerProperties.Jwt {
                 .signWith(SignatureAlgorithm.ES256,jwtSecret)
                 .compact();
     }
+
 
 
 }

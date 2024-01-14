@@ -9,6 +9,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,6 +27,8 @@ public class UserSevice {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+
 
 
     public UserModel addUserEmployee(UserDto userDto){
@@ -80,6 +83,8 @@ public class UserSevice {
         userRepository.save(user);
         return user;
     }
+
+
 
 
 }
