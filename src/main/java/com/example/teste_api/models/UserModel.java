@@ -7,8 +7,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 
 import java.util.Collection;
@@ -31,6 +30,7 @@ public class UserModel implements UserDetails {
     @ManyToOne
     @JoinColumn(name = "companyid", referencedColumnName = "uuid")
     private CompanyModel company;
+
 
     public boolean isEmpty() {
         return email == null && password == null && role == null && company == null;
@@ -56,15 +56,6 @@ public class UserModel implements UserDetails {
         this.role = role;
     }
 
-    public String bcryptPassword(String password){
-
-    }
-
-
-
-
-
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -72,7 +63,7 @@ public class UserModel implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return email;
     }
 
     @Override
@@ -92,6 +83,6 @@ public class UserModel implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

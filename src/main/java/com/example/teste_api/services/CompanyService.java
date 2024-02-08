@@ -30,6 +30,7 @@ public class CompanyService {
 
     @Transactional
     public CompanyModel createCompany( CompanyDto companyDto){
+
         CompanyModel companyModel = new CompanyModel(companyDto.companyName(),companyDto.cnpj());
         CompanyModel existCompany = companyRepository.findByCnpj(companyModel.getCnpj());
         if(existCompany != null){
@@ -42,7 +43,6 @@ public class CompanyService {
             UserModel user0 = new  UserModel(companyDto.email(),password, UserRoleEnums.CEO);
             user0.setCompany(companyModel);
             companyModel.addEmployee(user0);
-
             return  companyRepository.save(companyModel);
 
         }else {
@@ -79,4 +79,3 @@ public class CompanyService {
     }
 
 }
-//a Criação de conta vai ser feito em uma rota aberta createuser com o id da empresa como variavel de rota.

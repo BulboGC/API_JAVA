@@ -7,10 +7,12 @@ import com.example.teste_api.models.UserModel;
 import com.example.teste_api.repositories.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.apache.catalina.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.ErrorResponseException;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +31,18 @@ public class UserSevice {
     private EntityManager entityManager;
 
 
+    public UserModel findUser(String email){
+       return userRepository.findByEmail(email);
+    }
 
+
+    public UserModel findUserById(UUID uuid){
+       Optional<UserModel> user = userRepository.findById(uuid);
+       if(user.isEmpty()){
+           throw new Error("usuario nao encontrado");
+       }
+       return user.get();
+    }
 
     public UserModel addUserEmployee(UserDto userDto){
        try{
@@ -61,7 +74,7 @@ public class UserSevice {
         userRepository.deleteById(userId);
     }
 
-    public UserModel updaateUser(UUID uuid,UserDto userDto){
+    public UserModel updateUser(UUID uuid,UserDto userDto){
         Optional<UserModel> user = userRepository.findById(uuid);
         if(user.isEmpty()){
             throw new Error("o id so usuário informado é inválido");

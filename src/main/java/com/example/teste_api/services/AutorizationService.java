@@ -1,15 +1,17 @@
-
 package com.example.teste_api.services;
 
 
+
+import com.example.teste_api.repositories.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
-
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -18,7 +20,15 @@ import java.util.Map;
 import java.util.UUID;
 
 @Service
-public class JwtService extends OAuth2ResourceServerProperties.Jwt {
+public class AutorizationService  implements UserDetailsService {
+    @Autowired
+    UserRepository userRepository;
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+      return  userRepository.findByEmail(email);
+    }
+
 
     @Value("${jwt.secret}")
     private String jwtSecret;
@@ -26,7 +36,7 @@ public class JwtService extends OAuth2ResourceServerProperties.Jwt {
     @Value("${jwt.expiration}")
     private Long  jwtExpiration;
 
-    public String generateToken(UUID userId,UUID companyId){
+    public String generateToken(UUID userId, UUID companyId){
         Date now = new Date();
 
         Date expirationDate = new Date(now.getTime() + jwtExpiration);

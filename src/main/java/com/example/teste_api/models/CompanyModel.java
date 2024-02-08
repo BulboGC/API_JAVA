@@ -21,6 +21,7 @@ public class CompanyModel {
     private String name;
     @Column(nullable = false)
     private String cnpj;
+
     @Column(columnDefinition = "boolean default false")
     private  boolean paid;
 
@@ -29,9 +30,7 @@ public class CompanyModel {
     private List<UserModel> employeelist;
 
     public CompanyModel() {
-    }
-    public void  addEmployee(UserModel userModel){
-        employeelist.add(userModel);
+        this.employeelist = new ArrayList<>();
     }
 
     public CompanyModel(String name, String cnpj) {
@@ -39,6 +38,12 @@ public class CompanyModel {
         this.cnpj = cnpj;
         this.employeelist = new ArrayList<>();
     }
+
+    public void  addEmployee(UserModel userModel){
+        employeelist.add(userModel);
+    }
+
+
 
     public boolean isEmpty(){
         return  name == null;
