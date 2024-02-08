@@ -51,7 +51,7 @@ public class UserController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("empresa inválida, por favor digite um id válido");
             }
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(userSevice.addUserEmployee(userDto));
+            return ResponseEntity.status(HttpStatus.CREATED).body(userSevice.addUserEmployee(userDto) );
 
         }
 
