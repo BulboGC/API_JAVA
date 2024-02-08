@@ -75,14 +75,39 @@ public class UserController {
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> getEmployee(@PathVariable UUID userId){
 
+
         return ResponseEntity.status(HttpStatus.OK).body(userSevice.findUserById(userId));
     }
 
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable UUID userId){
+        userSevice.deleteUser(userId);
+        return ResponseEntity.status(HttpStatus.OK).body("usuário deletado com sucesso");
+    }
+
+    @GetMapping("/user/{companyId}")
+        public ResponseEntity<?> getAllEmployee(@PathVariable UUID companyId){
+            return ResponseEntity.status(HttpStatus.OK).body(companyService.getCompany(companyId).get().getEmployeelist());
+        }
+
+
+
+
+
+
+
+
 
 
 
 
     }
+
+
+
+
+
+
 
 
 
