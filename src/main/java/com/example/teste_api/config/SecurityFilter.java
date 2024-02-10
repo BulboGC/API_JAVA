@@ -24,7 +24,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         var token = this.recoveryToken(request);
         if (token != null) {
             var subject = "subject";
-            // Faça o que precisa com o token e o serviço de autorização
+
         }
         filterChain.doFilter(request, response);
     }

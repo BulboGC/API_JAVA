@@ -41,7 +41,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(authorize -> authorize
 
-                    .requestMatchers(HttpMethod.POST,"/register").permitAll()
+                    .requestMatchers(HttpMethod.POST,"/login").permitAll()
                     .requestMatchers(HttpMethod.POST,"/garoto").permitAll()
                     //.requestMatchers(HttpMethod.POST,"/garoto").hasRole("ADMIN")
 
