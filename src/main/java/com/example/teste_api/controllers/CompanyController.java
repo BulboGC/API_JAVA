@@ -36,16 +36,11 @@ public class CompanyController {
     }
 
 
-    @PostMapping("/garoto")
-    ResponseEntity<?> fazoL(@Valid @RequestBody   CompanyDto companyDto){
-        return ResponseEntity.status(HttpStatus.OK).body(new UserModel("bulbogc@gmail.com","1238425wky22"));
-    }
-
 
 
     @GetMapping("/garoto")
     ResponseEntity<?> garoto(){
-        GarotoModel garoto = new GarotoModel("gabriel","santos");
+        GarotoModel garoto = new GarotoModel("teste","rota");
         return ResponseEntity.status(HttpStatus.OK).body(garoto);
     }
 

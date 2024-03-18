@@ -2,6 +2,7 @@ package com.example.teste_api.models;
 
 
 import com.example.teste_api.enums.UserRoleEnums;
+import com.example.teste_api.enums.UserSectorEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -24,11 +25,16 @@ public class UserModel implements UserDetails {
     private String email;
     private String password;
     private UserRoleEnums role;
+    private UserSectorEnum sector;
+
+    @ManyToOne
+    @JoinColumn(name = "level_id", referencedColumnName = "id")
+    private AccessLevelModel level;
 
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "companyid", referencedColumnName = "uuid")
+    @JoinColumn(name = "company_id", referencedColumnName = "uuid")
     private CompanyModel company;
 
 
@@ -54,6 +60,12 @@ public class UserModel implements UserDetails {
         this.email = email;
         this.password = password;
         this.role = role;
+    }
+    public UserModel(String email, String password, UserRoleEnums role, UUID company,UserSectorEnum sector) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.sector =  sector;
     }
 
     @Override

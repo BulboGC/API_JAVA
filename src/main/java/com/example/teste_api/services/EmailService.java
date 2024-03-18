@@ -23,6 +23,7 @@ public class EmailService {
 
     @Transactional
     public EmailModel sendEmail(@NotNull EmailModel emailModel){
+
             emailModel.setSendDateEmail(LocalDateTime.now());
             try{
                 SimpleMailMessage message = new SimpleMailMessage();
